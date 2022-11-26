@@ -33,9 +33,9 @@ jobs:
           SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
           SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
 
-      - name: Stop the server
-        run: ssh staging 'ls -la'
-
+      # - name: Stop the server
+      #   run: ssh staging 'ls -la'
+      
       # - name: Check out the source
       #   run: ssh staging 'cd my-application && git fetch && git reset --hard origin/master'
 
@@ -43,4 +43,12 @@ jobs:
       #   if: ${{ always() }}
       #   run: ssh staging 'sudo systemctl start my-application'
 
+        - name: SSH Server
+          run: ssh -i ${{ secrets.STAGING_SSH_KEY }} ${{ secrets.STAGING_SSH_USER }}@${{ secrets.STAGING_SSH_HOST }}
+        
+        - name: Running commands into ser
+          run: |
+            ls -la 
+            cd RTWEB  
+     
     
