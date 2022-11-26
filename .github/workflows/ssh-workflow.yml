@@ -9,12 +9,9 @@ name: Simple SSH workflow
 #   pull_request:
 #     branches: [ "main" ]
 on: [workflow_dispatch]
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - name: Configure SSH
         run: |
