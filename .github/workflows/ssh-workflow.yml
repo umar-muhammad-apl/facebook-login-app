@@ -9,9 +9,12 @@ name: Simple SSH workflow
 #   pull_request:
 #     branches: [ "main" ]
 on: [workflow_dispatch]
+
 jobs:
   build:
+
     runs-on: ubuntu-latest
+
     steps:
       - name: Configure SSH
         run: |
@@ -33,19 +36,17 @@ jobs:
       # - name: Stop the server
       #   run: ssh staging 'ls -la'
       
+      - name: SSH Server
+        run: ssh -i ${{ secrets.STAGING_SSH_KEY }} ${{ secrets.STAGING_SSH_USER }}@${{ secrets.STAGING_SSH_HOST }}
+
+      - name: Running commands into ser
+        run: |
+            ls -la 
+            cd RTWEB       
+
       # - name: Check out the source
       #   run: ssh staging 'cd my-application && git fetch && git reset --hard origin/master'
 
       # - name: Start the server
       #   if: ${{ always() }}
       #   run: ssh staging 'sudo systemctl start my-application'
-
-        - name: SSH Server
-          run: ssh -i ${{ secrets.STAGING_SSH_KEY }} ${{ secrets.STAGING_SSH_USER }}@${{ secrets.STAGING_SSH_HOST }}
-        
-        - name: Running commands into ser
-          run: |
-            ls -la 
-            cd RTWEB  
-     
-    
